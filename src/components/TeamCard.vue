@@ -1,15 +1,5 @@
 <template>
   <v-card class="white--text">
-    <v-btn
-      fab
-      x-small
-      color="error"
-      absolute
-      right
-      top
-      @click="$emit('delete', id)"
-      ><v-icon small>mdi-delete</v-icon></v-btn
-    >
 
     <v-card-text>
       <div class="value text-center">Value: {{ called_value }}</div>

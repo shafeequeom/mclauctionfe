@@ -57,7 +57,7 @@
                 >
                 </v-img>
                 <div class="basevalue">
-                  Base Value: {{ player.value }} Points
+                  Current Value: {{ player.value }} Points
                 </div>
               </v-col>
               <v-col md="2"></v-col>
@@ -81,11 +81,21 @@
                   <v-col md="6">
                     <v-row>
                       <v-col md="6" v-if="player.status == 'Sold'">
-                        <v-btn color="error" @click="updateStatus('sold')"
+                        <v-btn color="error"
                           ><v-icon class="mr-2">mdi-cancel</v-icon> Sold</v-btn
                         >
+                        <v-img v-for="bid in bids" :key="bid.id"
+                        :src="
+                          bid.team.image
+                            ? bid.team.image
+                            : 'http://mclabudhabi.com/wp-content/uploads/2021/01/cropped-mcl-1.png'
+                        "
+                        height="150"
+                      >
+                      </v-img>
                       </v-col>
-                      <v-col md="6" v-if="player.status != 'Sold'">
+                      
+                      <!--<v-col md="6" v-if="player.status != 'Sold'">
                         <v-btn
                           color="success"
                           fab
@@ -102,7 +112,7 @@
                           @click="updateStatus('hold')"
                           >Hold<br />Player</v-btn
                         >
-                      </v-col>
+                      </v-col>-->
                     </v-row>
                   </v-col>
                 </v-row>
@@ -171,10 +181,9 @@
             :name="bid.team.name"
             :id="bid.id"
             :called_value="bid.called_value"
-            @delete="deleteBid"
           ></team-card>
         </v-col>
-        <v-col md="3">
+        <!--<v-col md="3">
           <v-card>
             <v-card-title class="text-center">Add Bid </v-card-title>
             <v-card-text>
@@ -209,7 +218,7 @@
               >
             </v-card-text>
           </v-card>
-        </v-col>
+        </v-col> -->
       </v-row>
     </v-container>
     <v-snackbar
@@ -360,7 +369,7 @@ export default {
           };
         });
     },
-    deleteBid(id) {
+    /*deleteBid(id) {
       this.$http
         .post(`auction/bid/delete/${id}`)
         .then((res) => {
@@ -381,7 +390,7 @@ export default {
             color: "error",
           };
         });
-    },
+    },*/
     updateStatus(status) {
       if (this.player.id == null) return;
       let formData = { player_id: this.player.id };
